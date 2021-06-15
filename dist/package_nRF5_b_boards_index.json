@@ -612,15 +612,15 @@
         {
           "name": "Nordic Semiconductor nRF5 Boards",
           "architecture": "nRF5",
-          "version": "0.7.62",
+          "version": "0.7.63",
           "category": "Contributed",
           "help": {
             "online": "https://github.com/sandeepmistry/arduino-nRF5/issues"
           },
-          "url": "https://github.com/biii-in/arduino-nRF5/raw/master/dist/arduino-nRF52-0.7.62.zip",
-          "archiveFileName": "arduino-nRF52-0.7.62.zip",
-          "checksum": "SHA-256:6572371C8139AC69BD85DFBC83A97428C7538B22634C4DF274B21917A59E391A",
-          "size": "2257666",
+          "url": "https://github.com/biii-in/arduino-nRF5/releases/download/0.7.63_rc1/arduino-nRF5-0.7.63-rc1.zip",
+          "archiveFileName": "arduino-nRF5-0.7.63-rc1.zip",
+          "checksum": "SHA-256:BA0C3C00F3EB7540AFCDD7DF3FE9BB4B0AF3FBB7D6074F7B8752D208D8F63265",
+          "size": "2269762",
           "boards": [
             {
               "name": "BBC micro:bit"
