@@ -619,8 +619,8 @@
           },
           "url": "https://github.com/biii-in/arduino-nRF5/releases/download/0.7.63_rc1/arduino-nRF5-0.7.63-rc1.zip",
           "archiveFileName": "arduino-nRF5-0.7.63-rc1.zip",
-          "checksum": "SHA-256:BA0C3C00F3EB7540AFCDD7DF3FE9BB4B0AF3FBB7D6074F7B8752D208D8F63265",
-          "size": "2269762",
+          "checksum": "SHA-256:3F0C855EFA84BFB5A95E15BBE1AA0D09822CD7BB73F520B66DEE5322A5208A9E",
+          "size": "2285233",
           "boards": [
             {
               "name": "BBC micro:bit"
