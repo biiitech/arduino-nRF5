@@ -1,0 +1,42 @@
+#######################################
+# Syntax Coloring Map BADC
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+BLPCOMP	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+startComparing	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+LPCOMP_PSEL_AIN0    LITERAL1
+LPCOMP_PSEL_AIN1    LITERAL1
+LPCOMP_PSEL_AIN2    LITERAL1
+LPCOMP_PSEL_AIN3    LITERAL1
+LPCOMP_PSEL_AIN4    LITERAL1
+LPCOMP_PSEL_AIN5    LITERAL1
+LPCOMP_PSEL_AIN6    LITERAL1
+LPCOMP_PSEL_AIN7    LITERAL1
+LPCOMP_NSEL_REF_1_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_2_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_3_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_4_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_5_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_6_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_7_8Vdd  LITERAL1
+LPCOMP_NSEL_REF_1_16Vdd LITERAL1
+LPCOMP_NSEL_REF_3_16Vdd LITERAL1
+LPCOMP_NSEL_REF_5_16Vdd LITERAL1
+LPCOMP_NSEL_REF_7_16Vdd LITERAL1
+LPCOMP_NSEL_REF_9_16Vdd LITERAL1
+LPCOMP_NSEL_REF_11_16Vdd    LITERAL1
+LPCOMP_NSEL_REF_13_16Vdd    LITERAL1
+LPCOMP_NSEL_REF_15_16Vdd    LITERAL1
+LPCOMP_NSEL_REF_AIN0    LITERAL1
+LPCOMP_NSEL_REF_AIN1 LITERAL1
