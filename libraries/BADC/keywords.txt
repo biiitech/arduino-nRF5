@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map BADC
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+BADC	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+sartScanMode	KEYWORD2
+startSampling	KEYWORD2
+getVoltsFromAdcVal  KEYWORD2
+readTemperature KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+BADC_ADC_PIN_2	LITERAL1
+BADC_ADC_PIN_3	LITERAL1
+BADC_ADC_PIN_4	LITERAL1
+BADC_ADC_PIN_5	LITERAL1
+BADC_ADC_PIN_28	LITERAL1
+BADC_ADC_PIN_29	LITERAL1
+BADC_ADC_PIN_30	LITERAL1
+BADC_ADC_PIN_31	LITERAL1
+BADC_ADC_PIN_VDD	LITERAL1
