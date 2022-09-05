@@ -16,45 +16,38 @@ BRTCClass BRTC;
 #define RTC_MIN_TICK_COUNT (8ul)
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
-    void RTC2_IRQHandler()
-    {
-        if (NRF_RTC2->EVENTS_COMPARE[RTC_TIMER_CHANNEL_PERIODIC])
-        {
-            NRF_RTC2->EVENTS_COMPARE[RTC_TIMER_CHANNEL_PERIODIC] = 0;
-            NRF_RTC2->CC[RTC_TIMER_CHANNEL_PERIODIC] += BRTC.rtc_stm.ch[RTC_TIMER_CHANNEL_PERIODIC].ms_tick;
-            if (BRTC.rtc_stm._tickCallback[RTC_TIMER_CHANNEL_PERIODIC])
-            {
-                BRTC.rtc_stm._tickCallback[RTC_TIMER_CHANNEL_PERIODIC]();
-            }
+void RTC2_IRQHandler()
+{
+    if (NRF_RTC2->EVENTS_COMPARE[RTC_TIMER_CHANNEL_PERIODIC]) {
+        NRF_RTC2->EVENTS_COMPARE[RTC_TIMER_CHANNEL_PERIODIC] = 0;
+        NRF_RTC2->CC[RTC_TIMER_CHANNEL_PERIODIC] += BRTC.rtc_stm.ch[RTC_TIMER_CHANNEL_PERIODIC].ms_tick;
+        if (BRTC.rtc_stm._tickCallback[RTC_TIMER_CHANNEL_PERIODIC]) {
+            BRTC.rtc_stm._tickCallback[RTC_TIMER_CHANNEL_PERIODIC]();
         }
-        else
-        {
-            for (int chid = RTC_TIMER_CHANNEL_ONE_SHOT_1; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++)
-            {
-                if (NRF_RTC2->EVENTS_COMPARE[chid])
-                {
-                    NRF_RTC2->EVENTS_COMPARE[chid] = 0;
-                    if (BRTC.rtc_stm._tickCallback[chid])
-                    {
-                        BRTC.rtc_stm._tickCallback[chid]();
-                    }
-                    NRF_RTC2->INTENCLR = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + chid)));
+    } else {
+        for (int chid = RTC_TIMER_CHANNEL_ONE_SHOT_1; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++) {
+            if (NRF_RTC2->EVENTS_COMPARE[chid]) {
+                NRF_RTC2->EVENTS_COMPARE[chid] = 0;
+                if (BRTC.rtc_stm._tickCallback[chid]) {
+                    BRTC.rtc_stm._tickCallback[chid]();
                 }
+                NRF_RTC2->INTENCLR = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + chid)));
             }
         }
     }
+}
 #ifdef __cplusplus
 }
 #endif
 
-uint64_t BRTCClass::getTickCount(uint32_t msPeriod)
+uint64_t BRTCClass::getTickCount(uint32_t msPeriod, uint16_t prescaller)
 {
     uint64_t ticks = msPeriod;
     ticks *= 32768;
     ticks /= 1000;
+    ticks /= prescaller;
     return ticks;
 }
 
@@ -65,49 +58,38 @@ bool BRTCClass::updateTickCounts(rtc_timer_ch_ids ch_id, uint32_t msPeriod, bool
     uint32_t min_ms = 0xFFFFFFFFul;
     uint32_t max_ms = 0;
     // update min and max delay
-    for (int chid = 0; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++)
-    {
-        if (this->rtc_stm.ch[chid].ms_delay > 0)
-        {
-            if (this->rtc_stm.ch[chid].ms_delay < min_ms)
-            {
+    for (int chid = 0; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++) {
+        if (this->rtc_stm.ch[chid].ms_delay > 0) {
+            if (this->rtc_stm.ch[chid].ms_delay < min_ms) {
                 min_ms = this->rtc_stm.ch[chid].ms_delay;
             }
-            if (this->rtc_stm.ch[chid].ms_delay > max_ms)
-            {
+            if (this->rtc_stm.ch[chid].ms_delay > max_ms) {
                 max_ms = this->rtc_stm.ch[chid].ms_delay;
             }
         }
     }
     error = (min_ms > max_ms);
-    if (!error)
-    {
+    if (!error) {
         // setup nrf rtc to tick at ms provided
         uint64_t tick_in_prescaller = 0;
-        uint64_t ticks = getTickCount(max_ms);
         uint32_t prescaller = 0;
-        do
-        {
+        uint64_t ticks = getTickCount(max_ms, prescaller);
+        do {
             prescaller++;
             tick_in_prescaller = ticks / prescaller;
         } while (tick_in_prescaller > RTC_MAX_TICK_COUNT);
         //
-        if (debug)
-        {
+        if (debug) {
             Serial.print("PSR ");
             Serial.println(prescaller);
         }
         error = (prescaller & 0xF000);
-        if (!error)
-        {
-            for (int chid = 0; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++)
-            {
-                if (this->rtc_stm.ch[chid].ms_delay > 0)
-                {
-                    this->rtc_stm.ch[chid].ms_tick = getTickCount(this->rtc_stm.ch[chid].ms_delay);
+        if (!error) {
+            for (int chid = 0; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++) {
+                if (this->rtc_stm.ch[chid].ms_delay > 0) {
+                    this->rtc_stm.ch[chid].ms_tick = getTickCount(this->rtc_stm.ch[chid].ms_delay, prescaller);
                     //
-                    if (debug)
-                    {
+                    if (debug) {
                         Serial.print(chid);
                         Serial.print(": MS>");
                         Serial.print(this->rtc_stm.ch[chid].ms_delay);
@@ -115,50 +97,35 @@ bool BRTCClass::updateTickCounts(rtc_timer_ch_ids ch_id, uint32_t msPeriod, bool
                         Serial.println(this->rtc_stm.ch[chid].ms_tick, HEX);
                     }
                     //
-                    if (this->rtc_stm.ch[chid].ms_tick < RTC_MIN_TICK_COUNT)
-                    {
+                    if (this->rtc_stm.ch[chid].ms_tick < RTC_MIN_TICK_COUNT) {
                         this->rtc_stm.ch[chid].ms_delay = 0;
                         error = true;
                     }
                 }
             }
             // everything is okay till now update all channels
-            if (!error)
-            {
+            if (!error) {
                 NRF_RTC2->PRESCALER = prescaller - 1;
-                for (int chid = 0; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++)
-                {
-                    if (this->rtc_stm.ch[chid].ms_delay > 0)
-                    {
+                for (int chid = 0; chid < RTC_TIMER_CHANNEL_ONE_SHOT_MAX; chid++) {
+                    if (this->rtc_stm.ch[chid].ms_delay > 0) {
                         NRF_RTC2->CC[chid] = NRF_RTC2->COUNTER + this->rtc_stm.ch[chid].ms_tick;
                         NRF_RTC2->INTENSET = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + chid)));
-                    }
-                    else
-                    {
+                    } else {
                         NRF_RTC2->INTENCLR = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + chid)));
                     }
                 }
-            }
-            else
-            {
-                if (debug)
-                {
+            } else {
+                if (debug) {
                     Serial.println("RTC: RNG Over");
                 }
             }
-        }
-        else
-        {
-            if (debug)
-            {
+        } else {
+            if (debug) {
                 Serial.println("RTC: PSR Over");
             }
         }
-    }
-    else
-    {
-        if (debug)
-        {
+    } else {
+        if (debug) {
             Serial.print("RTC: mM ERR: ");
             Serial.print(min_ms);
             Serial.print(" ");
@@ -172,8 +139,7 @@ bool BRTCClass::updateTickCounts(rtc_timer_ch_ids ch_id, uint32_t msPeriod, bool
 bool BRTCClass::setPeriodicTimer(uint32_t msPeriod, f_TickCallback periodicCallback, bool debug)
 {
     NRF_RTC2->TASKS_STOP = 1;
-    if (updateTickCounts(RTC_TIMER_CHANNEL_PERIODIC, msPeriod, debug))
-    {
+    if (updateTickCounts(RTC_TIMER_CHANNEL_PERIODIC, msPeriod, debug)) {
         this->rtc_stm._tickCallback[RTC_TIMER_CHANNEL_PERIODIC] = periodicCallback;
         //
         NVIC_ClearPendingIRQ(RTC2_IRQn);
@@ -189,11 +155,9 @@ bool BRTCClass::setPeriodicTimer(uint32_t msPeriod, f_TickCallback periodicCallb
 bool BRTCClass::setOneshotTimer(rtc_timer_ch_ids ch_id, uint32_t msDelay, f_TickCallback oneshotCallback, bool debug)
 {
     if ((ch_id > RTC_TIMER_CHANNEL_PERIODIC) &&
-        (ch_id < RTC_TIMER_CHANNEL_ONE_SHOT_MAX))
-    {
+        (ch_id < RTC_TIMER_CHANNEL_ONE_SHOT_MAX)) {
         NRF_RTC2->TASKS_STOP = 1;
-        if (updateTickCounts(ch_id, msDelay, debug))
-        {
+        if (updateTickCounts(ch_id, msDelay, debug)) {
             this->rtc_stm._tickCallback[ch_id] = oneshotCallback;
             //
             NVIC_ClearPendingIRQ(RTC2_IRQn);
@@ -210,8 +174,7 @@ bool BRTCClass::setOneshotTimer(rtc_timer_ch_ids ch_id, uint32_t msDelay, f_Tick
 bool BRTCClass::cancelOneshotTimer(rtc_timer_ch_ids ch_id)
 {
     if ((ch_id > RTC_TIMER_CHANNEL_PERIODIC) &&
-        (ch_id < RTC_TIMER_CHANNEL_ONE_SHOT_MAX))
-    {
+        (ch_id < RTC_TIMER_CHANNEL_ONE_SHOT_MAX)) {
         NRF_RTC2->TASKS_STOP = 1;
         NRF_RTC2->INTENCLR = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + ch_id)));
         NRF_RTC2->TASKS_START = 1;

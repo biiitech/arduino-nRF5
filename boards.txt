@@ -1122,3 +1122,105 @@ SeeedArchLink.menu.softdevice.s130.upload.maximum_size=151552
 SeeedArchLink.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
 SeeedArchLink.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_xxaa.ld
 
+SparkFunNRF52.name=SparkFun nRF52832 Breakout
+
+SparkFunNRF52.upload.tool=nrfutil
+SparkFunNRF52.upload.protocol=
+SparkFunNRF52.upload.interface=
+SparkFunNRF52.upload.target=nrf52
+SparkFunNRF52.upload.speed=38400
+SparkFunNRF52.upload.maximum_size=524288
+SparkFunNRF52.upload.use_1200bps_touch=false
+SparkFunNRF52.upload.wait_for_upload_port=false
+SparkFunNRF52.upload.native_usb=false
+
+SparkFunNRF52.bootloader.tool=sandeepmistry:openocd
+
+SparkFunNRF52.build.mcu=cortex-m4
+SparkFunNRF52.build.f_cpu=16000000
+SparkFunNRF52.build.board=NRF52_DK
+SparkFunNRF52.build.core=nRF5
+SparkFunNRF52.build.variant=SparkFun_nRF52832_Breakout
+SparkFunNRF52.build.variant_system_lib=
+SparkFunNRF52.build.extra_flags=-DNRF52
+SparkFunNRF52.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+SparkFunNRF52.build.ldscript=nrf52_xxaa.ld
+
+SparkFunNRF52.menu.softdevice.s132=S132
+SparkFunNRF52.menu.softdevice.s132.softdevice=s132
+SparkFunNRF52.menu.softdevice.s132.softdeviceversion=2.0.1
+SparkFunNRF52.menu.softdevice.s132.upload.maximum_size=409600
+SparkFunNRF52.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF51_S132
+SparkFunNRF52.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
+
+SparkFunNRF52.menu.lfclk.lfxo=Crystal Oscillator
+SparkFunNRF52.menu.lfclk.lfxo.build.lfclk_flags=-DUSE_LFXO
+SparkFunNRF52.menu.lfclk.lfrc=RC Oscillator
+SparkFunNRF52.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
+SparkFunNRF52.menu.lfclk.lfsynt=Synthesized
+SparkFunNRF52.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
+
+
+IonixTypeC.name=I.ONIX TypeC
+
+IonixTypeC.upload.tool=sandeepmistry:openocd
+IonixTypeC.upload.target=nrf52
+IonixTypeC.upload.maximum_size=524288
+
+IonixTypeC.bootloader.tool=sandeepmistry:openocd
+
+IonixTypeC.build.mcu=cortex-m4
+IonixTypeC.build.f_cpu=64000000
+IonixTypeC.build.board=NRF52_DK
+IonixTypeC.build.core=nRF5
+IonixTypeC.build.variant=I.ONIX_TypeC
+IonixTypeC.build.variant_system_lib=
+IonixTypeC.build.extra_flags=-DNRF52 -DCONFIG_NFCT_PINS_AS_GPIOS
+IonixTypeC.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+IonixTypeC.build.ldscript=nrf52_xxaa.ld
+
+IonixTypeC.menu.softdevice.s132=S132
+IonixTypeC.menu.softdevice.s132.softdevice=s132
+IonixTypeC.menu.softdevice.s132.softdeviceversion=2.0.1
+IonixTypeC.menu.softdevice.s132.upload.maximum_size=409600
+IonixTypeC.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF51_S132  -DCONFIG_NFCT_PINS_AS_GPIOS
+IonixTypeC.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
+
+IonixTypeC.menu.lfclk.lfxo=Crystal Oscillator
+IonixTypeC.menu.lfclk.lfxo.build.lfclk_flags=-DUSE_LFXO
+IonixTypeC.menu.lfclk.lfrc=RC Oscillator
+IonixTypeC.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
+IonixTypeC.menu.lfclk.lfsynt=Synthesized
+IonixTypeC.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
+
+IonixTypeC2.name=I.ONIX TypeC2
+
+IonixTypeC2.upload.tool=sandeepmistry:openocd
+IonixTypeC2.upload.target=nrf52
+IonixTypeC2.upload.maximum_size=524288
+
+IonixTypeC2.bootloader.tool=sandeepmistry:openocd
+
+IonixTypeC2.build.mcu=cortex-m4
+IonixTypeC2.build.f_cpu=64000000
+IonixTypeC2.build.board=NRF52_DK
+IonixTypeC2.build.core=nRF5
+IonixTypeC2.build.variant=I.ONIX_TypeC
+IonixTypeC2.build.variant_system_lib=
+IonixTypeC2.build.extra_flags=-DNRF52 -DCONFIG_NFCT_PINS_AS_GPIOS
+IonixTypeC2.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+IonixTypeC2.build.ldscript=nrf52_xxaa.ld
+
+IonixTypeC2.menu.softdevice.s132=S132
+IonixTypeC2.menu.softdevice.s132.softdevice=s132
+IonixTypeC2.menu.softdevice.s132.softdeviceversion=2.0.1
+IonixTypeC2.menu.softdevice.s132.upload.maximum_size=409600
+IonixTypeC2.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF51_S132  -DCONFIG_NFCT_PINS_AS_GPIOS
+IonixTypeC2.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
+
+IonixTypeC2.menu.lfclk.lfxo=Crystal Oscillator
+IonixTypeC2.menu.lfclk.lfxo.build.lfclk_flags=-DUSE_LFXO
+IonixTypeC2.menu.lfclk.lfrc=RC Oscillator
+IonixTypeC2.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
+IonixTypeC2.menu.lfclk.lfsynt=Synthesized
+IonixTypeC2.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
