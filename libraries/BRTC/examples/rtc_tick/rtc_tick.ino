@@ -10,7 +10,7 @@
 ///
 #include <BRTC.h>
 
-bool tick = false;
+volatile bool tick = false;
 uint8_t tickCount = 0;
 bool timer1expired = false;
 
@@ -18,19 +18,22 @@ void tickHandle()
 {
     tick = true;
     tickCount++;
+    Serial.print(tickCount);
+    Serial.println(":tick");
 }
 
 void timer1Expired()
 {
     timer1expired = true;
+    Serial.println("timer1expired");
 }
 
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("RTC START");
     delay(1000);
-    BRTC.setPeriodicTimer(10000, tickHandle);
+    Serial.println("RTC START");
+    BRTC.setPeriodicTimer(20 * 60 * 1000, tickHandle, true);
 }
 
 void loop()
@@ -38,17 +41,14 @@ void loop()
     if (tick)
     {
         tick = false;
-        Serial.println("tick");
-        if (tickCount >= 2)
+        if ((tickCount & 0x03) == 0x00)
         {
-            tickCount = 0;
-            BRTC.setOneshotTimer(RTC_TIMER_CHANNEL_ONE_SHOT_1, 2000, timer1Expired);
+            BRTC.setOneshotTimer(RTC_TIMER_CHANNEL_ONE_SHOT_1, 2000, timer1Expired, true);
         }
     }
     if (timer1expired)
     {
         timer1expired = false;
-        Serial.println("timer1expired");
     }
     __WFE();
     __WFI();

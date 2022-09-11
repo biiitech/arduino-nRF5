@@ -68,13 +68,27 @@ static const uint8_t A6 = PIN_A6;
 #define PIN_SERIAL_TX (27)
 
 /*
+ * SPI Interfaces
+ */
+#define SPI_INTERFACES_COUNT 1
+
+#define PIN_SPI_MISO (12)
+#define PIN_SPI_MOSI (11)
+#define PIN_SPI_SCK  (13)
+
+static const uint8_t SS = 10;
+static const uint8_t MOSI = PIN_SPI_MOSI;
+static const uint8_t MISO = PIN_SPI_MISO;
+static const uint8_t SCK = PIN_SPI_SCK;
+
+/*
  * Wire Interfaces
  */
 #define WIRE_INTERFACES_COUNT 1
 
-#define PIN_WIRE_CTRL (11u)
+#define PIN_WIRE_CTRL (17u)
 #define PIN_WIRE_SDA  (12u)
-#define PIN_WIRE_SCL  (17u)
+#define PIN_WIRE_SCL  (11u)
 
 #ifdef __cplusplus
 }

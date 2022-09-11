@@ -84,7 +84,7 @@ private:
     /// @return true
     /// @return false
     ///
-    uint64_t getTickCount(uint32_t ms);
+    uint64_t getTickCount(uint32_t ms, uint32_t prescaller);
     bool updateTickCounts(rtc_timer_ch_ids ch_id, uint32_t ms, bool debug = false);
 };
 

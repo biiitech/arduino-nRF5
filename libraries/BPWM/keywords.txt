@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map BPWM
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+BPWM	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+setConfig	KEYWORD2
+start   KEYWORD2
+stop    KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+eBPWM_0 LITERAL1
+eBPWM_1 LITERAL1
+eBPWM_2 LITERAL1
+eBPWM_CH_0  LITERAL1
+eBPWM_CH_1  LITERAL1
+eBPWM_CH_2  LITERAL1
+eBPWM_CH_3  LITERAL1

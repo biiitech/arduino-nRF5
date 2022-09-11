@@ -42,7 +42,7 @@ void RTC2_IRQHandler()
 }
 #endif
 
-uint64_t BRTCClass::getTickCount(uint32_t msPeriod, uint16_t prescaller)
+uint64_t BRTCClass::getTickCount(uint32_t msPeriod, uint32_t prescaller)
 {
     uint64_t ticks = msPeriod;
     ticks *= 32768;
@@ -72,8 +72,8 @@ bool BRTCClass::updateTickCounts(rtc_timer_ch_ids ch_id, uint32_t msPeriod, bool
     if (!error) {
         // setup nrf rtc to tick at ms provided
         uint64_t tick_in_prescaller = 0;
+        uint64_t ticks = getTickCount(max_ms, 1);
         uint32_t prescaller = 0;
-        uint64_t ticks = getTickCount(max_ms, prescaller);
         do {
             prescaller++;
             tick_in_prescaller = ticks / prescaller;
@@ -110,6 +110,14 @@ bool BRTCClass::updateTickCounts(rtc_timer_ch_ids ch_id, uint32_t msPeriod, bool
                     if (this->rtc_stm.ch[chid].ms_delay > 0) {
                         NRF_RTC2->CC[chid] = NRF_RTC2->COUNTER + this->rtc_stm.ch[chid].ms_tick;
                         NRF_RTC2->INTENSET = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + chid)));
+
+                        if (debug) {
+                            Serial.print(chid);
+                            Serial.print(": CC>");
+                            Serial.print(NRF_RTC2->CC[chid], HEX);
+                            Serial.print(" CNT>");
+                            Serial.println(NRF_RTC2->COUNTER, HEX);
+                        }
                     } else {
                         NRF_RTC2->INTENCLR = ((RTC_INTENSET_COMPARE0_Enabled << (RTC_INTENSET_COMPARE0_Pos + chid)));
                     }
