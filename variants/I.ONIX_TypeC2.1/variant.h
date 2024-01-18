@@ -38,10 +38,12 @@ extern "C" {
 // Serial
 #define PIN_SERIAL_RX (24)
 #define PIN_SERIAL_TX (22)
+
 // Wire
 #define WIRE_INTERFACES_COUNT 1
-#define PIN_WIRE_SDA          (5u)
-#define PIN_WIRE_SCL          (6u)
+#define PIN_WIRE_SDA          (6u)
+#define PIN_WIRE_SCL          (5u)
+
 // SPI
 #define SPI_INTERFACES_COUNT 1
 #define PIN_SPI_MISO         (12)
@@ -50,7 +52,7 @@ extern "C" {
 
 // USER NAMES
 #define LP_BUZZ_PIN        (11u)
-#define LPCOMP_PIN         (26u)
+#define LPCOMP_PIN         (28u)
 #define USR_BTN_PIN        (25u)
 #define BLUE_LED_PIN       (23u)
 #define MPR_VDD_CTRL_PIN   (4u)

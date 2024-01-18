@@ -223,3 +223,9 @@ The following tools are used:
 
  * [GCC ARM Embedded](https://launchpad.net/gcc-arm-embedded) as the compiler
  * A [forked](https://github.com/sandeepmistry/openocd-code-nrf5) version of [OpenOCD](http://openocd.org) to flash sketches
+
+
+openocd.exe -d2 -f interface/stlink-v2.cfg -f target/nrf52.cfg -c "transport select hla_swd; set WORKAREASIZE 0x4000;" -c "init; halt; nrf51 mass_erase; program s132_nrf52_2.0.1_softdevice.hex; reset; exit;"
+openocd.exe -d2 -f interface/stlink-v2.cfg -f target/nrf52.cfg -c "transport select hla_swd; set WORKAREASIZE 0x4000;" -c "init; halt; program beink_demo.ino.I.ONIX_TypeC2.hex; reset; exit;"
+openocd.exe -d2 -f interface/stlink-v2.cfg -f target/nrf52.cfg -c "transport select hla_swd; set WORKAREASIZE 0x4000;" -c "init; halt; program mprls_simple_test.ino.I.ONIX_TypeC2.hex; reset; exit;"
+openocd.exe -d2 -f interface/stlink-v2.cfg -f target/nrf52.cfg -c "transport select hla_swd; set WORKAREASIZE 0x4000;" -c "init; halt; program sleep_wake_test.ino.I.ONIX_TypeC2.hex; reset; exit;"

@@ -13,10 +13,12 @@
 void setup()
 {
     Serial.begin(115200);
-    delay(5000);
+    // delay(5000);
     BEINK.turn_on();
     Serial.println("BEINK START");
     Serial.println("setting white");
+    BEINK.clear(color_red);
+    BEINK.update();
     BEINK.clear(color_white);
     Serial.println("white ready");
     //

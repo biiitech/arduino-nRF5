@@ -289,9 +289,9 @@ int BEINKClass::print_line(uint16_t pos_x, uint16_t pos_y, char *line)
                 set_pixel_in_canvas(bit == 0, bit_pos_x, char_off_y, canvas_buf, canvas_width, canvas_height);
             }
             char_pixels += ((font->Width + 7) >> 3);
-            Serial.println();
+            // Serial.println();
         }
-        Serial.println();
+        // Serial.println();
     }
     //
     set_xy_window(pos_x >> 3, ((canvas_width + pos_x) >> 3) - 1, pos_y, pos_y + canvas_height - 1);

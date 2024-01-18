@@ -1224,3 +1224,35 @@ IonixTypeC2.menu.lfclk.lfrc=RC Oscillator
 IonixTypeC2.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
 IonixTypeC2.menu.lfclk.lfsynt=Synthesized
 IonixTypeC2.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
+
+IonixTypeC2_1.name=I.ONIX TypeC2.1
+
+IonixTypeC2_1.upload.tool=sandeepmistry:openocd
+IonixTypeC2_1.upload.target=nrf52
+IonixTypeC2_1.upload.maximum_size=524288
+
+IonixTypeC2_1.bootloader.tool=sandeepmistry:openocd
+
+IonixTypeC2_1.build.mcu=cortex-m4
+IonixTypeC2_1.build.f_cpu=64000000
+IonixTypeC2_1.build.board=NRF52_DK
+IonixTypeC2_1.build.core=nRF5
+IonixTypeC2_1.build.variant=I.ONIX_TypeC2.1
+IonixTypeC2_1.build.variant_system_lib=
+IonixTypeC2_1.build.extra_flags=-DNRF52 -DCONFIG_NFCT_PINS_AS_GPIOS
+IonixTypeC2_1.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+IonixTypeC2_1.build.ldscript=nrf52_xxaa.ld
+
+IonixTypeC2_1.menu.softdevice.s132=S132
+IonixTypeC2_1.menu.softdevice.s132.softdevice=s132
+IonixTypeC2_1.menu.softdevice.s132.softdeviceversion=2.0.1
+IonixTypeC2_1.menu.softdevice.s132.upload.maximum_size=409600
+IonixTypeC2_1.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF51_S132  -DCONFIG_NFCT_PINS_AS_GPIOS
+IonixTypeC2_1.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
+
+IonixTypeC2_1.menu.lfclk.lfxo=Crystal Oscillator
+IonixTypeC2_1.menu.lfclk.lfxo.build.lfclk_flags=-DUSE_LFXO
+IonixTypeC2_1.menu.lfclk.lfrc=RC Oscillator
+IonixTypeC2_1.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
+IonixTypeC2_1.menu.lfclk.lfsynt=Synthesized
+IonixTypeC2_1.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
