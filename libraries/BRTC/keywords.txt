@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map BADC
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+BRTC	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+setPeriodicTimer	KEYWORD2
+setOneshotTimer KEYWORD2
+cancelOneshotTimer	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+RTC_TIMER_CHANNEL_PERIODIC  LITERAL1
+RTC_TIMER_CHANNEL_ONE_SHOT_1    LITERAL1
+RTC_TIMER_CHANNEL_ONE_SHOT_2    LITERAL1
+RTC_TIMER_CHANNEL_ONE_SHOT_3    LITERAL1
+RTC_TIMER_CHANNEL_ONE_SHOT_MAX  LITERAL1
